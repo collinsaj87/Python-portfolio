@@ -58,8 +58,24 @@ class Agent():
             self.environment[self.y][self.x] -= 10
             self.store += 10
             
+            
     def share_with_neighbours(self, neighbourhood):
+    # Method to share information with each agent
         self.neighbourhood = neighbourhood
+        for agent in self.agents:                   # Loops through created agents list
+            distance = self.distance_between(agent)
+            if distance <= self.neighbourhood:      # Evaluates the distance compared to hardwired neighbourhood variable
+                sum = self.store + agent.store
+                average = sum / 2
+                self.store = average
+                agent.store = average
+               # print("sharing " + str(distance) + " " + str(average))
+            
+    def distance_between(self, agents):
+        return (((self._x - agents._x)**2) +((self._y - agents._y)**2))**0.5
+        
+        
+       
         
 
             
