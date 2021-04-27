@@ -1,12 +1,23 @@
 # model.py
 
-import random
-import operator
+import tkinter                  # for displaying GUI
+import matplotlib
+matplotlib.use('TkAgg')
 import matplotlib.pyplot
 import agentframework           # See agentframework.py
-import csv
-import matplotlib.animation
-    
+import csv                      # For reading in csv file
+import matplotlib.animation     # generates animation with x and y axis
+import requests                 # allows for import of html data
+import bs4                      # allows html data to be parsed into the model
+
+r = requests.get('http://www.geog.leeds.ac.uk/courses/computing/practicals/python/agent-framework/part9/data.html')
+content = r.text
+soup = bs4.BeautifulSoup(content, 'html.parser')
+td_y = soup.find_all(attrs={"class" : "y"})
+td_x = soup.find_all(attrs={"class" : "x"})
+print(td_y)
+print(td_x)
+
 
 num_of_agents = 10              # Dictates the number of agents in the environment
 num_of_iterations = 100         # Determines the number of times agent moves position
@@ -35,7 +46,9 @@ f.close()
 
 # Make the agents.
 for i in range(num_of_agents):
-    agents.append(agentframework.Agent(environment, agents))
+    y = int(td_y[i].text)
+    x = int(td_x[i].text)
+    agents.append(agentframework.Agent(environment, agents, y, x))
 
 carry_on = True
        
@@ -76,17 +89,25 @@ def gen_function(b = [0]):
         a = a + 1           
            
 #animation = matplotlib.animation.FuncAnimation(fig, update, interval=1, repeat = False, frames = num_of_agents)
-animation = matplotlib.animation.FuncAnimation(fig, update, frames=gen_function, repeat=False)
-matplotlib.pyplot.show()
+#animation = matplotlib.animation.FuncAnimation(fig, update, frames=gen_function, repeat=False)
+#matplotlib.pyplot.show()
 
- 
-'''
-a=agentframework.Agent(environment, agents)
-print(a.x, a.y)
-a.move()
-print(a.x, a.y)
-'''
+def run():
+    animation = matplotlib.animation.FuncAnimation(fig, update, frames=gen_function, repeat=False)
+    canvas.draw()
 
+root = tkinter.Tk()
+root.wm_title("Model")
+canvas = matplotlib.backends.backend_tkagg.FigureCanvasTkAgg(fig, master=root)
+canvas._tkcanvas.pack(side=tkinter.TOP, fill=tkinter.BOTH, expand=1)
+
+menu = tkinter.Menu(root)
+root.config(menu=menu)
+model_menu = tkinter.Menu(menu)
+menu.add_cascade(label="Model", menu=model_menu)
+model_menu.add_command(label="Run model", command=run)
+
+tkinter.mainloop()
 
 
 

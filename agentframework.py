@@ -5,11 +5,17 @@
 import random
 
 class Agent():
-    def __init__(self, environment, agents):
+    def __init__(self, environment, agents, td_y, td_x):
     #Gives agents the labels x and y and sets the random start location
-        self._y = random.randint(0,99)
-        self._x = random.randint(0,99)
-        # determines intial position of y and x
+        # determines intial position of y and x using web scrape to initialise
+        if (td_y == None):
+            self._y = random.randint(0, 100)
+        else:
+            self._y = td_y
+        if (td_x == None):
+            self._x = random.randint(0, 100)
+        else:
+            self._x = td_x
         self.environment = environment     
         self.agents = agents
         self.store = 0
