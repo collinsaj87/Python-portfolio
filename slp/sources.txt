@@ -1,0 +1,26 @@
+Websites used for help in Assignment 2:
+
+https://coderslegacy.com/python/python-gui/
+
+https://www.datacamp.com/community/tutorials/18-most-common-python-list-questions-learn-python#question16
+
+https://www.python-course.eu/tkinter_sliders.php
+
+https://www.youtube.com/watch?v=ieLE9F_RLsg
+
+https://www.activestate.com/resources/quick-reads/how-to-position-widgets-in-tkinter/ 
+
+https://www.youtube.com/watch?v=qMwVc7T9fCE
+
+https://ipywidgets.readthedocs.io/en/stable/examples/Widget%20Events.html
+
+THIS:
+https://docs.python.org/3/library/tkinter.html#coupling-widget-variables
+
+THIS:
+https://www.datacamp.com/community/tutorials/gui-tkinter-python
+
+RESET:
+https://stackoverflow.com/questions/35994811/how-would-i-create-a-reset-button-for-my-program-relating-with-the-following-cod/35994963
+
+https://docs.python.org/3/library/tkinter.messagebox.html
